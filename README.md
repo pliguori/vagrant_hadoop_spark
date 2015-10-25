@@ -1,9 +1,9 @@
-vagrant-hadoop-2.4.1-spark-1.0.1
+vagrant-hadoop-2.6.1-spark-1.4.1
 ================================
 
 # Introduction
 
-Vagrant project to spin up a cluster of 4 virtual machines with Hadoop v2.4.1 and Spark v1.0.1. 
+Vagrant project to spin up a cluster of 4 virtual machines with Hadoop v2.6.1 and Spark v1.4.1.
 
 1. node1 : HDFS NameNode + Spark Master
 2. node2 : YARN ResourceManager + JobHistoryServer + ProxyServer
@@ -35,14 +35,14 @@ If you have the resources (CPU + Disk Space + Memory), you may modify Vagrantfil
 # Make the VMs setup faster
 You can make the VM setup even faster if you pre-download the Hadoop, Spark, and Oracle JDK into the /resources directory.
 
-1. /resources/hadoop-2.4.1.tar.gz
-2. /resources/spark-1.0.1-bin-hadoop2.tgz
+1. /resources/hadoop-2.6.1.tar.gz
+2. /resources/spark-1.4.1-bin-hadoop2.tgz
 3. /resources/jdk-7u51-linux-x64.gz
 
 The setup script will automatically detect if these files (with precisely the same names) exist and use them instead. If you are using slightly different versions, you will have to modify the script accordingly.
 
 # Post Provisioning
-After you have provisioned the cluster, you need to run some commands to initialize your Hadoop cluster. Note, you need to be root to complete these post-provisioning steps. (Type in "su" and the password is "vagrant"). 
+After you have provisioned the cluster, you need to run some commands to initialize your Hadoop cluster. Note, you need to be root to complete these post-provisioning steps. (Type in "su" and the password is "vagrant").
 
 SSH into node1 and issue the following command.
 
@@ -85,7 +85,7 @@ $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     100
 ```
 
-### Test code directly on Spark	
+### Test code directly on Spark
 ```
 $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     --master spark://node1:7077 \
@@ -94,7 +94,7 @@ $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     $SPARK_HOME/lib/spark-examples*.jar \
     100
 ```
-	
+
 ### Test Spark using Shell
 Start the Spark shell using the following command. Try NOT to run this command on the slave nodes.
 
@@ -113,7 +113,7 @@ You can check the following URLs to monitor the Hadoop daemons.
 4. [Spark] (http://10.211.55.101:8080)
 
 # Vagrant boxes
-A list of available Vagrant boxes is shown at http://www.vagrantbox.es. 
+A list of available Vagrant boxes is shown at http://www.vagrantbox.es.
 
 # Vagrant box location
 The Vagrant box is downloaded to the ~/.vagrant.d/boxes directory. On Windows, this is C:/Users/{your-username}/.vagrant.d/boxes.
