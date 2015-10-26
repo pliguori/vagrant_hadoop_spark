@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 			node.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.1/centos65-x86_64-20131205.box"
 			node.vm.provider "virtualbox" do |v|
 			  v.name = "node#{i}"
-			  v.customize ["modifyvm", :id, "--memory", "2048"]
+			  v.customize ["modifyvm", :id, "--memory", "1024"]
 			end
 			if i < 10
 				node.vm.network :private_network, ip: "10.211.55.10#{i}"
@@ -48,4 +48,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 			end
 		end
 	end
+
+
+	(r.first).downto(r.last).each do |i|
+		config.vm.define "node#{i}" do |node|
+			if i == 1
+				node.vm.provision "shell" do |s|
+					s.path = "scripts/start-hdfs.sh"
+				end
+			end
+			if i == 2
+				node.vm.provision "shell" do |s|
+					s.path = "scripts/start-yarn.sh"
+				end
+			end
+		end
+	end
+
+
 end
